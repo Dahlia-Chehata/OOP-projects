@@ -8,26 +8,37 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
-public class Plate extends BaseShape{
+public class Plate extends BaseShape {
   protected int[]Xv;
   protected int[]Yv;
   
+  /**
+   * creates plate with given parameters.
+   * @param location location of top left corner in form of Point.awt(x,y).
+   * @param size size of top left corner in form of dimension.awt(w,h).
+   * @param color color of component.
+   */
   public Plate(Point location, Dimension size , Color color) {
     super( location,  size ,  color);
   
     generateVertices();
     
   }
+  
+  /**
+   * generate vertices of plate.
+   */
   protected void generateVertices() {
-    Xv= new int[4];
-    Yv= new int[4];
+    Xv = new int[4];
+    Yv = new int[4];
     Xv[0] = 0;
-    Xv[1] = size.width/4;
-    Xv[2] = size.width*3/4;
+    Xv[1] = size.width / 4;
+    Xv[2] = size.width * 3 / 4;
     Xv[3] = size.width;
     Yv[0] = Yv[3] = 0;
     Yv[1] = Yv[2] = size.height;
   }
+  
   @Override
   public void paintComponent(Graphics graphics) {
     super.paintComponent(graphics);
@@ -45,5 +56,5 @@ public class Plate extends BaseShape{
   public Rectangle getBounds() {
     return null;
   }
-
+  
 }

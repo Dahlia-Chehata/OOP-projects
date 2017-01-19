@@ -6,8 +6,14 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
-public class ImuutableShape extends BaseShape{
+public abstract class ImuutableShape extends BaseShape {
 
+  /**
+   * creates shape with given parameters.
+   * @param location location of top left corner in form of Point.awt(x,y).
+   * @param size size of top left corner in form of dimension.awt(w,h).
+   * @param color color of component.
+   */
   public ImuutableShape(Point location, Dimension size , Color color) {
     this.setLayout(null);
     this.location = location;
@@ -31,11 +37,11 @@ public class ImuutableShape extends BaseShape{
 
   @Override
   public final void setColor(Color color) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("shape is immutable");
   }
 
   @Override
   public final void setBounds(Rectangle bounds) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("shape is immutable");
   }
 }
