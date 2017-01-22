@@ -9,4 +9,6 @@ public interface IItem extends IGameComponent {
    * @return color of the component as Color.awt.
    */
   public Color getColor();
+  
+  public void drop();
 }

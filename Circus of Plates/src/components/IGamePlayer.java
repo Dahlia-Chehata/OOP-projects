@@ -1,5 +1,7 @@
 package components;
 
+import componentsImpl.Plate;
+
 public interface IGamePlayer extends IGameComponent {
   
   public int getScore();
@@ -8,8 +10,8 @@ public interface IGamePlayer extends IGameComponent {
   
   public void decrementScore();
   
-  public void addPlate(IItem nwItem);
+  public void addPlate(APlate nwItem);
   
-  public IItem[] getPlates();
+  public APlate[] getPlates();
 
 }

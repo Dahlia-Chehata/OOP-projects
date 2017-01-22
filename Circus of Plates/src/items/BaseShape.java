@@ -33,7 +33,7 @@ public abstract class BaseShape extends JComponent {
   }
 
   @Override
-  public void paintComponent(Graphics graphics) {
+  public  void paintComponent(Graphics graphics) {
     super.paintComponent(graphics);
   }
 
@@ -49,14 +49,14 @@ public abstract class BaseShape extends JComponent {
 
   @Override
   public void setLocation(Point location) {
-    this.location = location;
+    this.location = (Point) location.clone();
 
     super.setLocation(location);
   }
 
   @Override
   public void setSize(Dimension size) {
-    this.size = size;
+    this.size = (Dimension) size.clone();
 
     super.setSize(size);
   }

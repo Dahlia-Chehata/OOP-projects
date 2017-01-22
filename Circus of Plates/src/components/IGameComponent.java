@@ -29,4 +29,15 @@ public interface IGameComponent {
    * @return size as dimension.awt.
    */
   public Dimension getSize();
+  
+  public void acceptRequest(Point requested);
+  
+
+  public void acceptRequest();
+  public void declineRequest(Point requested);
+  
+
+  public boolean contains(Point requested);
+  
+  
 }

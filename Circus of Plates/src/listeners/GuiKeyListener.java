@@ -35,7 +35,8 @@ public class GuiKeyListener implements GuiListener, KeyListener {
 
   private void fireEvent() {
     Properties info = new Properties();
-    info.put("Key", key);
+    info.put("key", key);
+   // System.out.print("a "+info.containsKey("key"));
     for (Observer obs : observers) {
       obs.handleEvent(info);
     }
