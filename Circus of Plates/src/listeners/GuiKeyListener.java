@@ -1,7 +1,5 @@
 package listeners;
 
-import gui.Observer;
-
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

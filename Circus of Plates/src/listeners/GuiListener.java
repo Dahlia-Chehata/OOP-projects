@@ -2,8 +2,6 @@ package listeners;
 
 import java.awt.Component;
 
-import gui.Observer;
-
 public interface GuiListener {
   public void attachListener(Component source);
 

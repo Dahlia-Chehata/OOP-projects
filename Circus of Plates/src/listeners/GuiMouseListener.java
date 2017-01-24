@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import gui.Observer;
-
 public class GuiMouseListener implements GuiListener, MouseListener,MouseMotionListener {
   private Component source;
   private List<Observer> observers;

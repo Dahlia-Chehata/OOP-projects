@@ -15,8 +15,8 @@ import components.IGameComponent;
 import components.IGamePlayer;
 import components.IItem;
 import components.Iterator;
-import gui.Observer;
 import items.BaseShape;
+import listeners.Observer;
 
 /**
  * This class should impement basic operations of a player and is considered as

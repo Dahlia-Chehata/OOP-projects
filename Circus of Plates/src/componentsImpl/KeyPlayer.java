@@ -3,7 +3,7 @@ package componentsImpl;
 import java.awt.Dimension;
 import java.util.Properties;
 
-import gui.Observer;
+import listeners.Observer;
 
 public class KeyPlayer extends BasePlayer implements Observer {
 
