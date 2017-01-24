@@ -29,7 +29,6 @@ public class KeyPlayer extends BasePlayer implements Observer {
       
     
     if ( eventType.get("key") == l)
-      //System.out.println("A7a");
       moveLeft();
   
     if ( eventType.get("key") == r)
