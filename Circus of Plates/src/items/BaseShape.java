@@ -17,6 +17,8 @@ public abstract class BaseShape extends JComponent {
   public BaseShape() {
     this.setLayout(null);
     this.setVisible(true);
+    location = new Point();
+    size = new Dimension();
   }
 
   /**

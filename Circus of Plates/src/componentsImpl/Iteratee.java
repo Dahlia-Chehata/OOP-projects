@@ -42,14 +42,15 @@ public class Iteratee<T> implements Iterator<T> {
 
   @Override
   public T getval() {
-    if(data.size()== 0)
+    if (data.size() == 0)
       return null;
     return data.get(index);
   }
 
   @Override
   public void insert(T nwItem) {
-    data.add(nwItem);
+    data.add(0, nwItem);
+    // data.add(nwItem);
 
   }
 
@@ -62,6 +63,20 @@ public class Iteratee<T> implements Iterator<T> {
   @Override
   public void reset() {
     index = 0;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public T[] toArray() {
+
+    return (T[]) data.toArray();
+  }
+
+  @Override
+  public void remove() {
+    data.remove(index);
+    // index --;
+
   }
 
 }

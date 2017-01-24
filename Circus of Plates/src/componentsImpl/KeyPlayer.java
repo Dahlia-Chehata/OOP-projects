@@ -1,5 +1,6 @@
 package componentsImpl;
 
+import java.awt.Dimension;
 import java.util.Properties;
 
 import gui.Observer;
@@ -12,6 +13,7 @@ public class KeyPlayer extends BasePlayer implements Observer {
     super();
     this.l = l;
     this.r = r;
+    setSize(new Dimension(100,25));
   }
 
   @Override

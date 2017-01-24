@@ -6,6 +6,7 @@ import components.IItem;
 import items.BaseShape;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -16,9 +17,15 @@ public class Plate extends BaseShape implements IItem, APlate {
 
   private Point reqPosition;
 
+  public Plate() {
+    super();
+    this.setSize(new Dimension(25,5));
+    this.color = color.RED;
+  }
   @Override
   public Point requestedPosition() {
-
+    if(reqPosition == null)
+      reqPosition=(Point) location.clone();
     return reqPosition;
   }
 
@@ -60,6 +67,11 @@ public class Plate extends BaseShape implements IItem, APlate {
   public void acceptRequest(Point requested) {
     setLocation(requested);
     reqPosition = requested;
+  }
+  
+  @Override
+  public void acceptRequest() {
+    acceptRequest(reqPosition);
   }
 
   @Override
@@ -105,13 +117,15 @@ public class Plate extends BaseShape implements IItem, APlate {
   @Override
   public void drop() {
     reqPosition = new Point(location.x, location.y + 10);
-    acceptRequest(reqPosition);
+    //acceptRequest(reqPosition);
 
   }
-
+  
   @Override
-  public void acceptRequest() {
-    acceptRequest(reqPosition);
+  public String toString() {
+    return location.toString()+" "+size.toString();
+    
   }
+
 
 }

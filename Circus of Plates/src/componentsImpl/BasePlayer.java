@@ -37,13 +37,13 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
 
   protected BasePlayer() {
     score = 0;
-    acquired = new Iteratee<APlate>(); //TODO use dynamic linkage
-    reqPosition = location = new Point();
+    acquired = new Iteratee<APlate>(); // TODO use dynamic linkage
+    reqPosition =new Point();
+    location = new Point();
   }
-  
+
   @Override
   public Point requestedPosition() {
-
     return reqPosition;
   }
 
@@ -59,22 +59,22 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
     temp.setLocation(other.getActualPosition());
     temp.setSize(other.getSize());
     Iterator<APlate> it = acquired;
-    if(it.getval()!=null)
-    while (it != null) {
-       if (it.getval().intersects(other)) {
- System.out.println(it.getval().getActualPosition()+" "+other.getActualPosition());
-    
-        acquired.reset();
-        return true;
-      } 
-      it = it.getNext();
-    }
+    if (it.getval() != null)
+      while (it != null) {
+        if (it.getval().intersects(other)) {
+          System.out.println(it.getval().getActualPosition() + " " + other.getActualPosition());
+
+          acquired.reset();
+          return true;
+        }
+        it = it.getNext();
+      }
     acquired.reset();
 
     Rectangle mt = new Rectangle();
     mt.setLocation(reqPosition);
     mt.setSize(size);
-    
+
     return mt.intersects(temp);
 
   }
@@ -98,17 +98,20 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
   public void addPlate(APlate nwItem) {
     // nwItem = (APlate)nwItem;
     Iterator<APlate> it = acquired;
-    if(it.getval()!=null)
-    while (it != null) {
-      if (nwItem.intersects(it.getval()) ) {
-        it.getval().placeOver(nwItem);
+    if (it.getval() != null)
+      while (it != null) {
 
-        acquired.insert(nwItem);
-        acquired.reset();
-        return;
+        System.out.println(it.getval() + " "+nwItem);
+        if (nwItem.intersects(it.getval()) || it.getval().intersects(nwItem)) {
+
+          it.getval().placeOver(nwItem);
+
+          acquired.insert(nwItem);
+          acquired.reset();
+          return;
+        }
+        it = it.getNext();
       }
-      it = it.getNext();
-    }
     int newy = -nwItem.getActualPosition().y + location.y - nwItem.getSize().height;
     nwItem.shift(0, newy);
     nwItem.acceptRequest();
@@ -121,16 +124,23 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
   @Override
   public void acceptRequest(Point requested) {
     Iterator<APlate> it = acquired;
-    Point mainShift = new Point(requested.x-location.x,requested.y-location.y);
-    if(it.getval()!=null)
-    while (it != null ) {
-      APlate shit = it.getval();
-      shit.acceptRequest(new Point(shit.getActualPosition().x+mainShift.x ,
-          (shit.getActualPosition().y+mainShift.y  )));
-      it= it.getNext();
-    }
+    Point mainShift = new Point(requested.x - location.x, requested.y - location.y);
+    if (it.getval() != null)
+      while (it != null) {
+        APlate shit = it.getval();
+        shit.acceptRequest(
+            new Point(shit.getActualPosition().x + mainShift.x, 
+                (shit.getActualPosition().y + mainShift.y)));
+        it = it.getNext();
+      }
     acquired.reset();
     setLocation(requested);
+
+  }
+
+  @Override
+  public void acceptRequest() {
+    acceptRequest(reqPosition);
 
   }
 
@@ -148,13 +158,13 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
 
   public void moveLeft() {
     reqPosition = new Point(location.x - shift, location.y);
-    acceptRequest(reqPosition);
+   // acceptRequest(reqPosition);
 
   }
 
   public void moveRight() {
     reqPosition = new Point(location.x + shift, location.y);
-    acceptRequest(reqPosition);
+    //acceptRequest(reqPosition);
   }
 
   @Override
@@ -162,8 +172,8 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
     if (it.x < reqPosition.x || it.x > reqPosition.x + size.width) {
       return false;
     }
-    if (it.y < reqPosition.y  ||it.y > reqPosition.y + size.height) {
-      
+    if (it.y < reqPosition.y || it.y > reqPosition.y + size.height) {
+
       return false;
     }
     return true;
@@ -200,9 +210,4 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
     // TODO
   }
 
-  @Override
-  public void acceptRequest() {
-    // TODO Auto-generated method stub
-    
-  }
 }

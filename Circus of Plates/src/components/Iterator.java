@@ -16,6 +16,10 @@ public interface Iterator<T> {
 
   public void remove(int index);
   
+
+  public void remove();
   public void reset();
+  
+  public T[] toArray();
 
 }

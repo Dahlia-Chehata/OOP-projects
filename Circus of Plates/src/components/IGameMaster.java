@@ -12,9 +12,7 @@ public interface IGameMaster extends IGameController {
   
   public void pause();
   
-  public void addPlayer(IGamePlayer player ,int id);
-  
-  public void restartGame();
+  public void addPlayer(IGamePlayer player );
   
   public void save(File destination);
   
@@ -22,7 +20,7 @@ public interface IGameMaster extends IGameController {
   
   public void setLevel(int level);
   
-  public void insertplates(int prob);
+  public void insertplates(double prob);
   
   
   
