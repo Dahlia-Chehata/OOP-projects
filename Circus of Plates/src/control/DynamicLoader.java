@@ -28,8 +28,9 @@ import components.Iterator;
 public class DynamicLoader {
 
   public DynamicLoader() {
-    
+
   }
+
   public List<String> FileReader(String FileName) {
     File file = new File(FileName);
 
@@ -125,8 +126,7 @@ public class DynamicLoader {
     }
     return null;
   }
-  public static void main(String args[]) {
-    IGamePlayer she = new DynamicLoader().getPlayer();
-  }
+
+  
 
 }

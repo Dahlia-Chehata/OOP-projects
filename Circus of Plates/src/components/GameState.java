@@ -1,6 +1,6 @@
 package components;
 
-public interface GameState extends Momento<IGameController> {
+public interface GameState extends Momento<IGameMaster> {
 
   public PlateState[] getplates();
   

@@ -1,5 +1,6 @@
 package componentsImpl;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
@@ -7,6 +8,7 @@ import components.IGameComponent;
 import components.IGamePlayer;
 import components.PlateState;
 import components.PlayerState;
+import items.BaseShape;
 
 public class GamePlayerState implements PlayerState {
 
@@ -40,7 +42,23 @@ public class GamePlayerState implements PlayerState {
 
   @Override
   public void applyState(IGameComponent toApply) {
-    
+    BasePlayer six = (BasePlayer) toApply;
+    six.setLocation(location);
+    six.setSize(size);
+    six.moveLeft();
+    for(int i = plates.length-1;i>=0;i--) {
+      Plate nplate = null;
+      try {
+         nplate = (Plate) plates[i].getClass().newInstance();
+      } catch (InstantiationException | IllegalAccessException e) {
+        nplate = new Plate(Color.red);
+      }
+      nplate.drop();
+      plates[i].applyState(nplate);
+      six.addPlate(nplate);
+
+      six.getParent().add(nplate);
+    }
 
   }
 
@@ -58,6 +76,10 @@ public class GamePlayerState implements PlayerState {
   @Override
   public int getScore() {
     return score;
+  }
+  @Override
+  public Class<?> getImplementation(){
+    return implementingClass;
   }
 
 }

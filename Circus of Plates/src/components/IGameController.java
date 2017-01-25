@@ -1,5 +1,7 @@
 package components;
 
+import componentsImpl.GameStateImpl;
+
 public interface IGameController {
 
   /**
@@ -28,5 +30,5 @@ public interface IGameController {
   
   public int getScoreOf(int playerId) throws ArrayIndexOutOfBoundsException; 
   
-  public Momento<IGameController> toState();
+  public GameState toState();
 }

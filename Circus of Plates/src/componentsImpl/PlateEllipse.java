@@ -8,20 +8,21 @@ import java.awt.Graphics2D;
 @SuppressWarnings("serial")
 public class PlateEllipse extends Plate {
 
-  PlateEllipse(Color color) {
+  public PlateEllipse(Color color) {
     super(color);
-    this.setSize(new Dimension(25, 5));
+    //this.setSize(new Dimension(25, 5));
   }
-
+  
+@Override
   public void paintComponent(Graphics graphics) {
     super.paintComponent(graphics);
     Graphics2D graphics2D = (Graphics2D) graphics;
 
     graphics2D.setColor(color);
-    graphics.fillOval(0, 0, 5, 25);
+    graphics.fillOval(0, 0, 24, 4);
 
     graphics2D.setColor(Color.black);
-    graphics2D.drawOval(0, 0, 5, 25);
+    graphics2D.drawOval(0, 0, 24, 4);
   }
 
 }

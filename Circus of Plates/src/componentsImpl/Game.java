@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import components.APlate;
+import components.GameState;
 import components.IDispenser;
 import components.IGameComponent;
 import components.IGameController;
@@ -32,7 +33,16 @@ public class Game implements IGameMaster {
   private Thread runner;
   private int level;
 
-  public Game(JPanel gui) {
+  private static Game instance;
+  public static void clearInstance() {
+    instance = null;
+  }
+  public static Game getinstance(JPanel gui) {
+    if(instance==null)
+      instance = new Game(gui);
+    return instance;
+  }
+  private Game(JPanel gui) {
     bounds = gui.getSize();
     this.gui = gui;
     level = 0;
@@ -83,7 +93,7 @@ public class Game implements IGameMaster {
   }
 
   @Override
-  public Momento<IGameController> toState() {
+  public GameState toState() {
 
     return new GameStateImpl(this);
   }
@@ -150,6 +160,8 @@ public class Game implements IGameMaster {
 
   @Override
   public void addPlayer(IGamePlayer player) {
+    if(player ==null)
+      return;
     ((BasePlayer) player).pool = pool;
     System.out.println(player.getClass());
     if (players[0] == null) {

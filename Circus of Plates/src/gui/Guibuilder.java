@@ -109,12 +109,19 @@ public class Guibuilder extends JFrame {
     file.add(save);
 
     JMenuItem load = new JMenuItem("Load");
-    load.addActionListener(new ActionListener() {
+    load.addActionListener(new ActionListener() { 
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-        // c.load();
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(
+            getComponent(0)) == JFileChooser.APPROVE_OPTION) {
+          File file = fileChooser.getSelectedFile();
+          // System.out.println(file);
+          c.setFile(file);
+          c.load();
+        }
       }
     });
     file.add(load);

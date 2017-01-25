@@ -43,7 +43,7 @@ public class GuiLinker {
 
   public void startGame() {
     try {
-      game = new Game(gui);
+      game = Game.getinstance(gui);
     } catch (Exception e) {
       Log4j.fail(e.getMessage());
     }
@@ -69,6 +69,7 @@ public class GuiLinker {
     saver.save((Game) game);
     Log4j.success("game saved at "+out);
     } catch(Exception e) {
+      e.printStackTrace();
       Log4j.fail("failed to save game at "+out+"due to\n"+e.getMessage());
     }
   }
@@ -76,10 +77,22 @@ public class GuiLinker {
   public void load() {
     
     try {
-      game = (IGameMaster) saver.load();
+      game = (IGameMaster) saver.load(gui);
       Log4j.success("game loaded from "+out);
+      BasePlayer pla1 = (BasePlayer) game.getPlayer(0);
+
+      BasePlayer pla2 = (BasePlayer) game.getPlayer(1);
+      if(pla1 instanceof KeyPlayer) {
+        pla1.getEvent().attachListener(source);
+      } else
+        pla1.getEvent().attachListener(gui);
+      if(pla2 instanceof KeyPlayer) {
+        pla2.getEvent().attachListener(source);
+      }else
+        pla2.getEvent().attachListener(gui);
       } catch(Exception e) {
-        Log4j.fail("failed to load game at "+out+"due to\n"+e.getMessage());
+        e.printStackTrace();
+        Log4j.fail("failed to load game at "+out+"due to\n");
       }
   }
 
@@ -96,7 +109,6 @@ public class GuiLinker {
   }
 
   public void addPlayer(int index) {
-    System.out.println("ssss");
     BasePlayer player = null;
     switch (index) {
     case 1:

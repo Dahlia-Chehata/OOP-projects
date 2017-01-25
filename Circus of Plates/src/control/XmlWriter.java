@@ -6,11 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import components.GameState;
 import components.IGameController;
 import componentsImpl.Game;
+import componentsImpl.GameStateImpl;
 
 public class XmlWriter implements GameWriter{
 
@@ -32,17 +36,17 @@ public class XmlWriter implements GameWriter{
   public void save(IGameController game) {
     String xml = "";
     xml = xstream.toXML(game.toState());
-    //System.out.println(xml);
     try {
       FileWriter t = new FileWriter(writer);
       t.write(xml);
+      t.close();
+     // System.out.println(xml + writer.getAbsolutePath());
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
 
-  public IGameController load() {
+  public IGameController load(JPanel gui) {
     String xml = "";
     Scanner inp = null;
     try {
@@ -53,7 +57,15 @@ public class XmlWriter implements GameWriter{
     }
     while (inp.hasNextLine())
       xml += inp.nextLine();
-    Game toret = (Game) xstream.fromXML(xml);
-    return toret;
+    
+    GameState toret = (GameStateImpl) xstream.fromXML(xml);
+
+    System.out.println(toret.getplayers()[0].getLocation());
+      gui.removeAll();
+      Game.clearInstance();
+      Game game = Game.getinstance(gui);
+      toret.applyState(game);
+    return game;
   }
+
 }

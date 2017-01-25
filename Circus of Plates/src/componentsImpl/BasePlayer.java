@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import components.APlate;
-import components.ICollection;
 import components.IDispenser;
 import components.IGameComponent;
 import components.IGamePlayer;

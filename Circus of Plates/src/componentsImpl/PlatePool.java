@@ -8,6 +8,7 @@ import java.util.Random;
 
 import components.IDispenser;
 import components.IItem;
+import control.PlateLoader;
 import items.BaseShape;
 
 /**
@@ -21,8 +22,10 @@ public class PlatePool implements IDispenser<IItem> {
 
   protected Queue<IItem> bank;
   protected Color[] colors;
+  protected PlateLoader loader;
 
   public PlatePool() {
+    loader = new PlateLoader("plates.config");
     bank = new LinkedList<IItem>();
     colors = new Color[5];
     colors[0] = Color.RED;
@@ -40,9 +43,9 @@ public class PlatePool implements IDispenser<IItem> {
   public synchronized IItem getNewInstance() {
     int threshold = new Random().nextInt(100);
     if ( bank.isEmpty()|| threshold > 60) {
-      //TODO change creation of plates
       System.out.println("bolo");
-      IItem nwItem = new Plate(colors[new Random().nextInt(5)]);
+      IItem nwItem =  loader.getItsem(new Random().nextInt(3),
+          (colors[new Random().nextInt(5)]));
       return nwItem;
     }
     IItem nwItem = bank.poll();

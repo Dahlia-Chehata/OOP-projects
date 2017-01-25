@@ -43,13 +43,13 @@ public class Main {
     frame.setLayout(null);
     frame.add(bewa);
 
-    Game yala = new Game(bewa);
+    Game yala;// = Game.getinstance(bewa);
     //kok.moveRight();
-    mom.getEvent().attachListener(frame);
-
-    kok.getEvent().attachListener(frame);
-    yala.addPlayer(kok);
-    yala.addPlayer(mom);
+//    mom.getEvent().attachListener(frame);
+//
+//    kok.getEvent().attachListener(frame);
+//    yala.addPlayer(kok);
+//    yala.addPlayer(mom);
     File f= new File("temp.xml");
     try {
       f.createNewFile();
@@ -57,7 +57,7 @@ public class Main {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    //yala.save(f);
+    yala = (Game) new XmlWriter(f).load(bewa);
 
     JButton bu = new JButton();
     bu.setBounds(new Rectangle(0,0,50,20));
