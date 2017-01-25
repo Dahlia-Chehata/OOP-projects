@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.swing.JFrame;
+
 
 public class GuiKeyListener implements GuiListener, KeyListener {
 
   private Component source;
   private List<Observer> observers;
-  private char key;
+  private int key;
 
   public GuiKeyListener() {
     this.source = null;
@@ -26,8 +28,10 @@ public class GuiKeyListener implements GuiListener, KeyListener {
 
   @Override
   public void attachListener(Component source) {
+    if(source instanceof JFrame) {
     this.source = source;
     source.addKeyListener(this);
+    }
 
   }
 
@@ -66,7 +70,8 @@ public class GuiKeyListener implements GuiListener, KeyListener {
 
   @Override
   public void keyPressed(KeyEvent arg0) {
-    key = arg0.getKeyChar();
+    key = arg0.getKeyCode();
+    
     fireEvent();
 
   }

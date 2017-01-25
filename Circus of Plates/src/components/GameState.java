@@ -2,9 +2,9 @@ package components;
 
 public interface GameState extends Momento<IGameController> {
 
-  public Momento<IItem>[] getplates();
+  public PlateState[] getplates();
   
-  public Momento<IGamePlayer>[] getplayers();
+  public PlayerState[] getplayers();
   
   public int getTime();
   

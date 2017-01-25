@@ -1,6 +1,6 @@
 package components;
 
-public interface PlayerState extends Momento<IGamePlayer> {
+public interface PlayerState extends ComponentState {
 
   public PlateState[] getPlates();
   

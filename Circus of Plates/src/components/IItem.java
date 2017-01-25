@@ -11,4 +11,7 @@ public interface IItem extends IGameComponent {
   public Color getColor();
   
   public void drop();
+  
+
+  public PlateState toState();
 }

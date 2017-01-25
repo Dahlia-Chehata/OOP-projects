@@ -14,4 +14,5 @@ public interface IGamePlayer extends IGameComponent {
   
   public APlate[] getPlates();
 
+  public PlayerState toState();
 }

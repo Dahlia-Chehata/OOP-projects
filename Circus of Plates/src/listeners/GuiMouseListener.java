@@ -28,6 +28,7 @@ public class GuiMouseListener implements GuiListener, MouseListener,MouseMotionL
   public void attachListener(Component source) {
     this.source = source;
     source.addMouseListener(this);
+    source.addMouseMotionListener(this);
 
   }
 
@@ -60,7 +61,7 @@ public class GuiMouseListener implements GuiListener, MouseListener,MouseMotionL
 
   @Override
   public void mouseClicked(MouseEvent arg0) {
-    fireEvent();
+    
   }
 
   @Override
@@ -85,6 +86,7 @@ public class GuiMouseListener implements GuiListener, MouseListener,MouseMotionL
   @Override
   public void mouseReleased(MouseEvent arg0) {
     releasePoint = arg0.getPoint();
+   // fireEvent();
     return;
 
   }
@@ -103,8 +105,12 @@ public class GuiMouseListener implements GuiListener, MouseListener,MouseMotionL
 
   @Override
   public void mouseDragged(MouseEvent arg0) {
-    // TODO Auto-generated method stub
-    
+   Point curr  = arg0.getPoint();
+   if(Math.abs(curr.x - pressPoint.x) > 20) {
+     releasePoint = curr;
+     fireEvent();
+     pressPoint = curr;
+   }
   }
 
   @Override

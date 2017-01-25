@@ -7,15 +7,20 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import components.APlate;
 import components.ICollection;
+import components.IDispenser;
 import components.IGameComponent;
 import components.IGamePlayer;
 import components.IItem;
 import components.Iterator;
+import components.Momento;
+import components.PlayerState;
 import items.BaseShape;
+import listeners.GuiListener;
 import listeners.Observer;
 
 /**
@@ -28,18 +33,32 @@ import listeners.Observer;
  *
  */
 @SuppressWarnings("serial")
-public class BasePlayer extends BaseShape implements IGamePlayer {
+public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
 
   private int score;
   private Point reqPosition;
   private Iterator<APlate> acquired;
   public static int shift;
+  private HashMap<Color, Integer> colors;
+  protected IDispenser<IItem> pool;
+  private int totPlates;
 
-  protected BasePlayer() {
+  public BasePlayer() {
+    score = 0;
+    totPlates = 0;
+    acquired = new PlateIterator(); // TODO use dynamic linkage
+    reqPosition = new Point();
+    location = new Point();
+    colors = new HashMap<Color, Integer>();
+  }
+
+  protected BasePlayer(IDispenser<IItem> pool) {
     score = 0;
     acquired = new Iteratee<APlate>(); // TODO use dynamic linkage
-    reqPosition =new Point();
+    reqPosition = new Point();
     location = new Point();
+    colors = new HashMap<Color, Integer>();
+    this.pool = pool;
   }
 
   @Override
@@ -62,7 +81,8 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
     if (it.getval() != null)
       while (it != null) {
         if (it.getval().intersects(other)) {
-          System.out.println(it.getval().getActualPosition() + " " + other.getActualPosition());
+          // System.out.println(it.getval().getActualPosition() + " " +
+          // other.getActualPosition());
 
           acquired.reset();
           return true;
@@ -97,26 +117,45 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
   @Override
   public void addPlate(APlate nwItem) {
     // nwItem = (APlate)nwItem;
+
+    totPlates++;
+    if (colors.containsKey(nwItem.getColor()) && colors.get(nwItem.getColor()) == 2) {
+      score++;
+      clearPlates(nwItem.getColor());
+      pool.dispose(nwItem);
+      return;
+    }
+    if (totPlates == 6) {
+      clearPlates();
+      pool.dispose(nwItem);
+      return;
+    }
+    boolean placed = false;
     Iterator<APlate> it = acquired;
-    if (it.getval() != null)
+    if (it.getval() != null) {
       while (it != null) {
 
-        System.out.println(it.getval() + " "+nwItem);
         if (nwItem.intersects(it.getval()) || it.getval().intersects(nwItem)) {
-
+          placed = true;
           it.getval().placeOver(nwItem);
 
-          acquired.insert(nwItem);
-          acquired.reset();
-          return;
         }
         it = it.getNext();
       }
-    int newy = -nwItem.getActualPosition().y + location.y - nwItem.getSize().height;
-    nwItem.shift(0, newy);
-    nwItem.acceptRequest();
+    }
+    if (!placed) {
+      int newy = -nwItem.getActualPosition().y + location.y - nwItem.getSize().height;
+      nwItem.shift(0, newy);
+      nwItem.acceptRequest();
+    }
+
     acquired.insert(nwItem);
     acquired.reset();
+    if (!colors.containsKey(nwItem.getColor())) {
+      colors.put(nwItem.getColor(), 1);
+    } else
+      colors.put(nwItem.getColor(), colors.get(nwItem.getColor()) + 1);
+
     return;
 
   }
@@ -129,8 +168,7 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
       while (it != null) {
         APlate shit = it.getval();
         shit.acceptRequest(
-            new Point(shit.getActualPosition().x + mainShift.x, 
-                (shit.getActualPosition().y + mainShift.y)));
+            new Point(shit.getActualPosition().x + mainShift.x, (shit.getActualPosition().y + mainShift.y)));
         it = it.getNext();
       }
     acquired.reset();
@@ -152,19 +190,19 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
 
   @Override
   public APlate[] getPlates() {
-    return null;
+    return acquired.toArray();
 
   }
 
   public void moveLeft() {
     reqPosition = new Point(location.x - shift, location.y);
-   // acceptRequest(reqPosition);
+    //System.out.println("left");
 
   }
 
   public void moveRight() {
     reqPosition = new Point(location.x + shift, location.y);
-    //acceptRequest(reqPosition);
+
   }
 
   @Override
@@ -203,11 +241,74 @@ public class BasePlayer extends BaseShape implements IGamePlayer {
   }
 
   public void clearPlates(Color ofColor) {
-    // TODO
+    acquired.reset();
+    Iterator<APlate> it = acquired;
+    acquired = new Iteratee<APlate>();
+    colors = new HashMap<Color, Integer>();
+    while (it.hasNext())
+      it.getNext();
+    if (it.getval() != null) {
+      while (it.hasPrev()) {
+
+        if (it.getval() != null && it.getval().getColor() == ofColor) {
+          pool.dispose(it.getval());
+          // it.remove();
+        } else {
+          addPlate(it.getval());
+
+        }
+        it = it.getPrev();
+      }
+      if (it.getval() != null && it.getval().getColor() == ofColor) {
+        pool.dispose(it.getval());
+        // it.remove();
+      } else {
+        addPlate(it.getval());
+
+      }
+
+    }
+    acquired.reset();
+    colors.put(ofColor, 0);
+    totPlates -= 2;
   }
 
   public void clearPlates() {
-    // TODO
+    Iterator<APlate> it = acquired;
+    if (it.getval() != null)
+      while (it != null) {
+
+        if (it.getval() != null) {
+          pool.dispose(it.getval());
+          it.remove();
+        }
+        else
+          it = it.getNext();
+      }
+    acquired.reset();
+    for (Color c : colors.keySet()) {
+
+      colors.put(c, 0);
+    }
+    totPlates = 0;
+  }
+
+  @Override
+  public PlayerState toState() {
+    return new GamePlayerState(this);
+  }
+
+  @Override
+  public void handleEvent() {
+    
+  }
+
+  @Override
+  public void handleEvent(Properties eventType) {
+  }
+  
+  public GuiListener getEvent() {
+    return null;
   }
 
 }

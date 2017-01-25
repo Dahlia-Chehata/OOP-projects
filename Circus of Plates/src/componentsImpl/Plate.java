@@ -3,6 +3,7 @@ package componentsImpl;
 import components.APlate;
 import components.IGameComponent;
 import components.IItem;
+import components.PlateState;
 import items.BaseShape;
 
 import java.awt.Color;
@@ -17,15 +18,17 @@ public class Plate extends BaseShape implements IItem, APlate {
 
   private Point reqPosition;
 
-  public Plate() {
+  public Plate(Color color) {
     super();
-    this.setSize(new Dimension(25,5));
-    this.color = color.RED;
+    this.setSize(new Dimension(25, 5));
+    this.color = color;
   }
+
   @Override
   public Point requestedPosition() {
-    if(reqPosition == null)
-      reqPosition=(Point) location.clone();
+    if (reqPosition == null) {
+      reqPosition = (Point) location.clone();
+    }
     return reqPosition;
   }
 
@@ -68,7 +71,7 @@ public class Plate extends BaseShape implements IItem, APlate {
     setLocation(requested);
     reqPosition = requested;
   }
-  
+
   @Override
   public void acceptRequest() {
     acceptRequest(reqPosition);
@@ -117,15 +120,19 @@ public class Plate extends BaseShape implements IItem, APlate {
   @Override
   public void drop() {
     reqPosition = new Point(location.x, location.y + 10);
-    //acceptRequest(reqPosition);
+    // acceptRequest(reqPosition);
 
   }
-  
+
   @Override
   public String toString() {
-    return location.toString()+" "+size.toString();
-    
+    return location.toString() + " " + size.toString() + " " + color;
+
   }
 
+  @Override
+  public PlateState toState() {
+    return new GamePlateState(this);
+  }
 
 }
