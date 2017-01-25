@@ -232,7 +232,7 @@ public class Game implements IGameMaster {
     int i = 0;
     while (true) {
 
-      System.out.println(pause+" "+level);
+      Thread.sleep(2);
       if (pause) {
         continue;
       } else {

@@ -50,6 +50,7 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
     reqPosition = new Point();
     location = new Point();
     colors = new HashMap<Color, Integer>();
+    BasePlayer.shift = 10;
   }
 
   protected BasePlayer(IDispenser<IItem> pool) {

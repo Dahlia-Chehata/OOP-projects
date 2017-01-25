@@ -29,7 +29,6 @@ public class Main {
   
   public static void main (String args[]) {
     JFrame frame =new JFrame();
-    GuiKeyListener bob = new GuiKeyListener();
     KeyPlayer mom = new KeyPlayer(KeyPlayer.leftCharCode,KeyPlayer.rightCharCode);
     BasePlayer.shift = 10;
     KeyPlayer moms = new KeyPlayer(KeyPlayer.leftArrowCode,KeyPlayer.rightArrowCode);

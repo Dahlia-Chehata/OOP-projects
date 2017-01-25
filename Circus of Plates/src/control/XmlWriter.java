@@ -31,7 +31,7 @@ public class XmlWriter implements GameWriter{
 
   public void save(IGameController game) {
     String xml = "";
-    xml = xstream.toXML(game);
+    xml = xstream.toXML(game.toState());
     //System.out.println(xml);
     try {
       FileWriter t = new FileWriter(writer);
