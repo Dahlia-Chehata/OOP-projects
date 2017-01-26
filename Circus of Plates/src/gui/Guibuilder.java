@@ -95,12 +95,11 @@ public class Guibuilder extends JFrame {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+        
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showSaveDialog(
             getComponent(0)) == JFileChooser.APPROVE_OPTION) {
           File file = fileChooser.getSelectedFile();
-          // System.out.println(file);
           c.setFile(file);
           c.save();
         }
@@ -113,12 +112,11 @@ public class Guibuilder extends JFrame {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+       
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showSaveDialog(
             getComponent(0)) == JFileChooser.APPROVE_OPTION) {
           File file = fileChooser.getSelectedFile();
-          // System.out.println(file);
           c.setFile(file);
           c.load();
         }
@@ -131,9 +129,8 @@ public class Guibuilder extends JFrame {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+       
         c.run();
-        // System.out.println("run");
       }
     });
     game.add(run);
@@ -142,9 +139,8 @@ public class Guibuilder extends JFrame {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+        
         c.pause();
-        // System.out.println("pause");
       }
     });
     game.add(pause);
@@ -163,7 +159,7 @@ public class Guibuilder extends JFrame {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        //c.pause();
+        c.endGame();
         try {
           Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -179,9 +175,6 @@ public class Guibuilder extends JFrame {
     this.add(p2);
   }
 
-  public static void main(final String[] args) {
-    Guibuilder window = new Guibuilder();
-    window.setVisible(true);
-  }
+  
 
 }

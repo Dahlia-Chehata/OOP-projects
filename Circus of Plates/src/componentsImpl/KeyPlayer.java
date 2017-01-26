@@ -8,44 +8,51 @@ import listeners.GuiKeyListener;
 import listeners.GuiListener;
 import listeners.Observer;
 
+@SuppressWarnings("serial")
 public class KeyPlayer extends BasePlayer implements Observer {
 
-  private int l, r;
+  private int left;
+  private int right;
   public static int leftArrowCode = KeyEvent.VK_LEFT;
   public static int rightArrowCode = KeyEvent.VK_RIGHT;
 
   public static int leftCharCode = KeyEvent.VK_A;
   public static int rightCharCode = KeyEvent.VK_D;
   private GuiKeyListener event;
+
   public KeyPlayer(int l, int r) {
     super();
-    this.l = l;
-    this.r = r;
-    setSize(new Dimension(100,25));
+    this.left = l;
+    this.right = r;
+    setSize(new Dimension(100, 25));
     event = new GuiKeyListener();
     event.addObserver(this);
   }
 
+  /**
+   * handles known event.
+   */
   @Override
   public void handleEvent() {
-    // TODO Auto-generated method stub
+    return;
 
   }
 
+  /**
+   * handles event.
+   */
   @Override
   public void handleEvent(Properties eventType) {
-      if ( !eventType.containsKey("key"))
+    if (!eventType.containsKey("key"))
       return;
-
-      System.out.println("move");
-    
-    if ((Integer) eventType.get("key") == l)
+    if ((Integer) eventType.get("key") == left)
       moveLeft();
-  
-    if ((Integer) eventType.get("key") == r)
+
+    if ((Integer) eventType.get("key") == right)
       moveRight();
 
   }
+
   @Override
   public GuiListener getEvent() {
     return event;

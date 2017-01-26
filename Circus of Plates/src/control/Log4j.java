@@ -13,16 +13,18 @@ import org.apache.logging.log4j.Logger;
 
 public class Log4j {
 
-  private static final Logger logger = LogManager.getLogger(Log4j.class.getName());
-
+  private static  Logger logger = null;
+public static void loadLogger() {
+  logger = LogManager.getLogger(Log4j.class.getName());
+}
+  
   public static void success(String message) {
-    //logger.trace(message);
-    System.out.println(message);
+    logger.trace(message);
   }
 
   public static void fail(String message) {
-    //logger.error(message);
-    System.out.println(message);
+    logger.error(message);
+   
   }
 
   public static void severeError(String message) {

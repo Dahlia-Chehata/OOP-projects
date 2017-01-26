@@ -54,6 +54,7 @@ public class Game implements IGameMaster {
     pool = new PlatePool();
     runner = new RunningThread();
     runner.start();
+    gui.removeAll();
 
   }
 
@@ -253,7 +254,7 @@ public class Game implements IGameMaster {
 
         if (i % 50 == 0)
           insertplates((7) / 10.0);
-        Thread.sleep(100 - level * 40);
+        Thread.sleep(65 - level * 20);
         dropPlates();
         i++;
         i%=1000;

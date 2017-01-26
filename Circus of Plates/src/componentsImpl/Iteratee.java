@@ -50,7 +50,7 @@ public class Iteratee<T> implements Iterator<T> {
   @Override
   public void insert(T nwItem) {
     data.add(0, nwItem);
-    // data.add(nwItem);
+    
 
   }
 
@@ -75,7 +75,6 @@ public class Iteratee<T> implements Iterator<T> {
   @Override
   public void remove() {
     data.remove(index);
-    // index --;
 
   }
 

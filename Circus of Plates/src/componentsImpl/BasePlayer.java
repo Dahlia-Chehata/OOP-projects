@@ -81,8 +81,6 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
     if (it.getval() != null)
       while (it != null) {
         if (it.getval().intersects(other)) {
-          // System.out.println(it.getval().getActualPosition() + " " +
-          // other.getActualPosition());
 
           acquired.reset();
           return true;
@@ -116,7 +114,6 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
 
   @Override
   public void addPlate(APlate nwItem) {
-    // nwItem = (APlate)nwItem;
 
     totPlates++;
     if (colors.containsKey(nwItem.getColor()) && colors.get(nwItem.getColor()) == 2) {
@@ -125,7 +122,7 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
       pool.dispose(nwItem);
       return;
     }
-    if (totPlates == 6) {
+    if (totPlates >= 6) {
       clearPlates();
       pool.dispose(nwItem);
       return;
@@ -153,8 +150,9 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
     acquired.reset();
     if (!colors.containsKey(nwItem.getColor())) {
       colors.put(nwItem.getColor(), 1);
-    } else
+    } else {
       colors.put(nwItem.getColor(), colors.get(nwItem.getColor()) + 1);
+    }
 
     return;
 
@@ -164,13 +162,15 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
   public void acceptRequest(Point requested) {
     Iterator<APlate> it = acquired;
     Point mainShift = new Point(requested.x - location.x, requested.y - location.y);
-    if (it.getval() != null)
+    if (it.getval() != null) {
       while (it != null) {
         APlate shit = it.getval();
         shit.acceptRequest(
-            new Point(shit.getActualPosition().x + mainShift.x, (shit.getActualPosition().y + mainShift.y)));
+            new Point(shit.getActualPosition().x + mainShift.x, 
+                (shit.getActualPosition().y + mainShift.y)));
         it = it.getNext();
       }
+    }
     acquired.reset();
     setLocation(requested);
 
@@ -196,7 +196,6 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
 
   public void moveLeft() {
     reqPosition = new Point(location.x - shift, location.y);
-    //System.out.println("left");
 
   }
 
@@ -245,14 +244,14 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
     Iterator<APlate> it = acquired;
     acquired = new Iteratee<APlate>();
     colors = new HashMap<Color, Integer>();
-    while (it.hasNext())
+    while (it.hasNext()) {
       it.getNext();
+    }
     if (it.getval() != null) {
       while (it.hasPrev()) {
 
         if (it.getval() != null && it.getval().getColor() == ofColor) {
           pool.dispose(it.getval());
-          // it.remove();
         } else {
           addPlate(it.getval());
 
@@ -275,16 +274,17 @@ public class BasePlayer extends BaseShape implements IGamePlayer,Observer {
 
   public void clearPlates() {
     Iterator<APlate> it = acquired;
-    if (it.getval() != null)
+    if (it.getval() != null) {
       while (it != null) {
 
         if (it.getval() != null) {
           pool.dispose(it.getval());
           it.remove();
-        }
-        else
+        } else {
           it = it.getNext();
+        }
       }
+    }
     acquired.reset();
     for (Color c : colors.keySet()) {
 

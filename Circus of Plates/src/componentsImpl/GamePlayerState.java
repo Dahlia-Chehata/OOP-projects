@@ -67,18 +67,28 @@ public class GamePlayerState implements PlayerState {
     // TODO Auto-generated method stub
     return null;
   }
-
+  /**
+   * gets plates.
+   * 
+   * @return array of plate.
+   */
   @Override
   public PlateState[] getPlates() {
     return plates;
   }
 
+  /**
+   * gets the player's score.
+   * 
+   * @return the score.
+   */
   @Override
   public int getScore() {
     return score;
   }
+
   @Override
-  public Class<?> getImplementation(){
+  public Class<?> getImplementation() {
     return implementingClass;
   }
 

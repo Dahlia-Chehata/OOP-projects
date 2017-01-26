@@ -11,32 +11,43 @@ import listeners.Observer;
 public class MousePlayer extends BasePlayer implements Observer {
 
   private GuiMouseListener event;
-  
+
   public MousePlayer() {
     super();
-    setSize(new Dimension(100,25));
+    setSize(new Dimension(100, 25));
     event = new GuiMouseListener();
     event.addObserver(this);
   }
+
+  /**
+   * handles known event.
+   */
   @Override
   public void handleEvent() {
-    // TODO Auto-generated method stub
+    return;
 
   }
 
+  /**
+   * handles event.
+   */
   @Override
   public void handleEvent(Properties eventType) {
-    //System.out.println("ss");
-    if (!eventType.containsKey("start") || !eventType.containsKey("release"))
+
+    if (!eventType.containsKey("start") || !eventType.containsKey("release")) {
       return;
+    }
 
-    if (((Point)eventType.get("start")).x > ((Point)eventType.get("release")).x )
+    if (((Point) eventType.get("start")).x > ((Point) eventType.get("release")).x) {
       moveLeft();
+    }
 
-    if (((Point)eventType.get("start")).x < ((Point)eventType.get("release")).x )
+    if (((Point) eventType.get("start")).x < ((Point) eventType.get("release")).x) {
       moveRight();
+    }
 
   }
+
   public GuiListener getEvent() {
     return event;
   }

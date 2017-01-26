@@ -43,7 +43,7 @@ public class PlatePool implements IDispenser<IItem> {
   public synchronized IItem getNewInstance() {
     int threshold = new Random().nextInt(100);
     if ( bank.isEmpty()|| threshold > 60) {
-      System.out.println("bolo");
+      
       IItem nwItem =  loader.getItsem(new Random().nextInt(3),
           (colors[new Random().nextInt(5)]));
       return nwItem;

@@ -19,30 +19,26 @@ public class GameStateImpl implements GameState {
   public GameStateImpl(IGameController source) {
     time = source.getTime();
     level = source.getLevel();
-    implementingClass= source.getClass();
-   // plates = new PlateState[source.getplates().length];
+    implementingClass = source.getClass();
     players = new PlayerState[2];
-//    for (int i = 0;i < source.getplates().length;i++ ) {
-//      plates[i] = (PlateState)source.getplates()[i].toState();
-//    }
-    
+
     players[0] = source.getPlayer(0).toState();
     players[1] = source.getPlayer(1).toState();
   }
-  
+
   @Override
   public void applyState(IGameMaster toApply) {
-    BasePlayer p1=null,p2=null;
+    BasePlayer p1 = null, p2 = null;
     try {
-       p1 = (BasePlayer) players[0].getImplementation().newInstance();
+      p1 = (BasePlayer) players[0].getImplementation().newInstance();
 
-       p2 = (BasePlayer) players[1].getImplementation().newInstance();
+      p2 = (BasePlayer) players[1].getImplementation().newInstance();
     } catch (InstantiationException | IllegalAccessException e) {
-      p1 = new KeyPlayer(KeyPlayer.leftArrowCode,KeyPlayer.rightArrowCode);
+      p1 = new KeyPlayer(KeyPlayer.leftArrowCode, KeyPlayer.rightArrowCode);
 
-      p2 = new KeyPlayer(KeyPlayer.leftCharCode,KeyPlayer.rightCharCode);
+      p2 = new KeyPlayer(KeyPlayer.leftCharCode, KeyPlayer.rightCharCode);
     }
-    
+
     toApply.addPlayer(p1);
     toApply.addPlayer(p2);
     players[0].applyState(p1);
@@ -53,30 +49,38 @@ public class GameStateImpl implements GameState {
 
   @Override
   public IGameMaster capturedState() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public PlateState[] getplates() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
+  /**
+   * get players
+   * 
+   * @return array of players.
+   */
   @Override
   public PlayerState[] getplayers() {
     return players;
   }
 
+  /**
+   * @return time.
+   */
   @Override
   public int getTime() {
 
-    return (int)time;
+    return (int) time;
   }
 
   @Override
   public int getLevel() {
-   
+
     return level;
   }
 

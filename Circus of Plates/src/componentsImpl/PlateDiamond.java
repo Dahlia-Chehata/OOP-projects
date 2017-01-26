@@ -21,9 +21,9 @@ public class PlateDiamond extends Plate {
     Xv[1] = size.width / 2;
     Xv[2] = size.width ;
     Xv[3] = size.width / 2;
-    Yv[0] = Yv[3] = size.height/2;
+    Yv[0] = Yv[2] = size.height/2;
     Yv[1] = 0;
-    Yv[2] = size.height;
+    Yv[3] = size.height;
     Graphics2D graphics2D = (Graphics2D) graphics;
 
     graphics2D.setColor(color);

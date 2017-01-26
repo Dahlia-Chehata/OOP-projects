@@ -47,6 +47,8 @@ public class GuiLinker {
     } catch (Exception e) {
       Log4j.fail(e.getMessage());
     }
+
+    Log4j.success("GameStarted");
   }
 
   private void setLabel(JLabel toset, int ind) {
@@ -128,6 +130,8 @@ public class GuiLinker {
     }
     if (player != null)
       game.addPlayer(player);
+
+    Log4j.success("Player added");
   }
 
   public void announceWinner() {
@@ -167,8 +171,8 @@ public class GuiLinker {
       }
       p1.setText(s1 + "");
 
-      p2.setText(s2 + "");
-      if (Math.abs(s1 - s2) > 6) {
+      p2.setText(s2 + " "+level+1);
+      if (Math.abs(s1 - s2) > 6 || level > 2) {
         announceWinner();
         endGame();
       }

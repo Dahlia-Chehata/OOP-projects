@@ -10,7 +10,6 @@ public class PlateEllipse extends Plate {
 
   public PlateEllipse(Color color) {
     super(color);
-    //this.setSize(new Dimension(25, 5));
   }
   
 @Override

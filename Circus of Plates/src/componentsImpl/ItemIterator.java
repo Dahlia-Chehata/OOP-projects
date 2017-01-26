@@ -1,6 +1,8 @@
 package componentsImpl;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import components.APlate;
 import components.IItem;
@@ -8,12 +10,16 @@ import components.Iterator;
 
 public class ItemIterator implements Iterator<IItem> {
 
-  private ArrayList<IItem> data;
+  private Queue<IItem> data;
   private int index;
+
+  private Queue<IItem> data2;
 
   public ItemIterator() {
     index = 0;
-    data = new ArrayList<IItem>();
+    data = new PriorityQueue<IItem>();
+
+    data2 = new PriorityQueue<IItem>();
   }
 
   @Override
@@ -44,7 +50,7 @@ public class ItemIterator implements Iterator<IItem> {
 
   @Override
   public void insert(IItem nwItem) {
-    data.add(0, nwItem);
+    data.add( nwItem);
     // data.add(nwItem);
 
   }
@@ -72,14 +78,14 @@ public class ItemIterator implements Iterator<IItem> {
   public IItem getval() {
     if (data.size() == 0)
       return null;
-    return data.get(index);
+    return data.peek();
   }
 
   @Override
   public IItem[] toArray() {
     IItem[] toret = new IItem[data.size()];
     for(int i=0;i<data.size() ; i++)
-      toret[i] =(APlate)data.get(i);
+      toret[i] =(APlate)data.peek();
     return toret;
     
   }

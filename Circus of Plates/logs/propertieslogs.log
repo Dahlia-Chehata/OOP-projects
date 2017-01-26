@@ -1,0 +1,27 @@
+[TRACE] 2017-01-26 02:46:10.752 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:48:28.157 [AWT-EventQueue-0] Log4j - game loaded from C:\Users\Ahmed Hamdy\Documents\sss.xml.txt 
+[TRACE] 2017-01-26 02:50:54.516 [AWT-EventQueue-0] Log4j - GameStarted 
+[TRACE] 2017-01-26 02:50:57.484 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:50:59.415 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:51:21.255 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:51:23.288 [AWT-EventQueue-0] Log4j - Game progressed 
+[TRACE] 2017-01-26 02:51:25.406 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:51:26.933 [AWT-EventQueue-0] Log4j - Game progressed 
+[TRACE] 2017-01-26 02:51:28.538 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:51:30.535 [AWT-EventQueue-0] Log4j - Game progressed 
+[TRACE] 2017-01-26 02:52:46.193 [AWT-EventQueue-0] Log4j - GameStarted 
+[TRACE] 2017-01-26 02:52:48.802 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:52:50.332 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:52:58.287 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:53:00.769 [AWT-EventQueue-0] Log4j - Game Ended with0 0 
+[TRACE] 2017-01-26 02:53:40.440 [AWT-EventQueue-0] Log4j - GameStarted 
+[TRACE] 2017-01-26 02:53:42.582 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:53:43.494 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:53:48.532 [AWT-EventQueue-0] Log4j - Game Paused 
+[TRACE] 2017-01-26 02:53:56.600 [AWT-EventQueue-0] Log4j - game saved at C:\Users\Ahmed Hamdy\Documents\sss.xml.txt 
+[TRACE] 2017-01-26 02:53:59.098 [AWT-EventQueue-0] Log4j - Game progressed 
+[TRACE] 2017-01-26 02:54:03.476 [AWT-EventQueue-0] Log4j - Game Ended with0 0 
+[TRACE] 2017-01-26 02:57:34.040 [AWT-EventQueue-0] Log4j - GameStarted 
+[TRACE] 2017-01-26 02:57:36.149 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 02:57:37.797 [AWT-EventQueue-0] Log4j - Player added 
+[TRACE] 2017-01-26 03:03:05.192 [Thread-2] Log4j - Game Ended with10 12 

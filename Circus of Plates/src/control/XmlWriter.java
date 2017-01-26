@@ -33,6 +33,9 @@ public class XmlWriter implements GameWriter{
     this.writer = writer;
   }
 
+  /**
+   * saves game to XML file.
+   */
   public void save(IGameController game) {
     String xml = "";
     xml = xstream.toXML(game.toState());
@@ -46,6 +49,9 @@ public class XmlWriter implements GameWriter{
     }
   }
 
+  /**
+   * load game from XML file.
+   */
   public IGameController load(JPanel gui) {
     String xml = "";
     Scanner inp = null;
